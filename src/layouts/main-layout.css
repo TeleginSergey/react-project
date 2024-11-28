@@ -1,0 +1,38 @@
+.main-layout {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+.button-group {
+    display: flex;
+    gap: 5px; /* Отступ между кнопками в группе */
+}
+
+.button-margin {
+    margin-right: 5px; /* Отступ между кнопками */
+}
+
+.button-margin:last-child {
+    margin-right: 0; /* Убираем отступ у последней кнопки */
+}
+
+.divider {
+    margin: 8px 0; /* Отступ сверху и снизу для <hr /> */
+    border: 1px solid #4a90e2; /* граница */
+}
+
+.custom-button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer; /* Курсор при наведении */
+    transition: background-color 0.3s easy; /* Плавный переход цвета фона */
+}
+
+.custom-button:hover {
+    background-color: #5a98de; /* Цвет фона при наведении */
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+}
