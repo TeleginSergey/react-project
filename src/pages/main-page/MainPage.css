@@ -1,0 +1,19 @@
+.rounded-card-main{
+    margin-bottom: 8px;
+    border-radius: 20px;
+    border: 2px solid #4a90e2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    position: relative;
+    padding-bottom: 27px;
+    padding-top: 10px;
+}
+
+.card-footer {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    text-align: right;
+    padding-top: 10px;
+}
+
