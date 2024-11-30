@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react';
 import { Card } from "@consta/uikit/Card";
 import { Text } from "@consta/uikit/Text";
+import {useApiQuery} from "../../store/api-actions";
+import { Loader } from '@consta/uikit/Loader';
 import './MainPage.css';
 
 const MainPage = () => {
-    const [data, setData] = useState([]);
+    const { data, loading, error } = useApiQuery('https://673423afa042ab85d1190055.mockapi.io/api/v1/main');
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await fetch('https://673423afa042ab85d1190055.mockapi.io/api/v1/main');
-            const data = await response.json();
-            setData(data);
-        }
-        fetchData();
-    }, []);
+    if (loading) {
+        return <div style={{display: "flex", alignItems: 'center', justifyContent: 'center', height: '70vh'}}>
+            <Loader size={'m'}/>
+        </div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
 
     return (
         <div>
