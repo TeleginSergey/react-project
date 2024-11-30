@@ -5,10 +5,10 @@ import {Responses404} from "@consta/uikit/Responses404";
 
 import MainPage from "../../pages/main-page/MainPage"
 import ServicePage from '../../pages/service-page/ServicePage'
-import ServiceDetail from "../../pages/service-detail-page/ServiceDetail";
+import ServiceDetailPage from "../../pages/service-detail-page/ServiceDetail";
 import MainLayout from "../../layouts/main-layout";
-import profilePage from "../../pages/profile-page/profilePage";
-import loginPage from "../../pages/login-page/loginPage";
+import ProfilePage from "../../pages/profile-page/ProfilePage";
+import LoginPage from "../../pages/login-page/LoginPage";
 
 
 
@@ -18,10 +18,10 @@ const App = () => {
       <Routes>
         <Route path={"/"} element={<MainLayout />}>
           <Route index element={<MainPage />}/>
-          <Route path={"/service/:id"} element={<ServiceDetail />}/>
+          <Route path={"/service/:id"} element={<ServiceDetailPage />}/>
           <Route path={"/services"} element={<ServicePage />}/>
-          <Route path={"/profile"} element={<profilePage />}/>
-          <Route path={"/login"} element={<loginPage />}/>
+          <Route path={"/profile"} element={<ProfilePage />}/>
+          <Route path={"/login"} element={<LoginPage />}/>
         </Route>
         <Route path={'*'} element={<Responses404 />}/>
       </Routes>
