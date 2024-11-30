@@ -1,7 +1,11 @@
 .main-layout {
-    margin-top: 15px;
     display: flex;
     flex-direction: row;
+}
+
+.divider {
+    margin: 8px 0; /* Отступ сверху и снизу для <hr /> */
+    border: 1px solid #4a90e2; /* граница */
 }
 
 .button-group {
@@ -17,22 +21,18 @@
     margin-right: 0; /* Убираем отступ у последней кнопки */
 }
 
-.divider {
-    margin: 8px 0; /* Отступ сверху и снизу для <hr /> */
-    border: 1px solid #4a90e2; /* граница */
-}
-
-.custom-button {
-    background-color: #4a90e2;
-    color: white;
+.nav-button {
+    background-color: white;
+    color: #5a98de;
     border: none;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer; /* Курсор при наведении */
-    transition: background-color 0.3s easy; /* Плавный переход цвета фона */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Плавный переход цвета фона и тени */
+    text-decoration: none; /* Убираем подчеркивание текста */
 }
 
-.custom-button:hover {
+.nav-button:hover {
     background-color: #5a98de; /* Цвет фона при наведении */
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
 }
