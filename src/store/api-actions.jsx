@@ -1,27 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-export function useApiQuery(url) {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+import {getToken} from "./token";
+import {useNavigate} from "react-router-dom";
+
+export function useApiQuery(url, setPage, checking=true) {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
 
     useEffect(() => {
-        async function fetchData() {
+        const userToken = getToken();
+
+        if (checking && !userToken) {
+            navigate("/login");
+            return;
+        }
+        const fetchData = async () => {
             try {
                 const response = await fetch(url);
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error("Network response was not ok");
                 }
                 const data = await response.json();
-                setData(data);
+                dispatch(setPage(data));
             } catch (error) {
-                setError(error);
-            } finally {
-                setLoading(false);
+                console.error("Error fetching data:", error);
             }
-        }
-        fetchData();
-    }, [url]);
-
-    return { data, loading, error };
+        };
+            fetchData();
+        }, [url, dispatch, navigate]);
 }

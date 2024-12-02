@@ -1,36 +1,44 @@
-import React, {useEffect, useState} from "react";
+
 import {Card} from "@consta/uikit/Card";
 import {Text} from "@consta/uikit/Text";
-import './ServicePage.css';
 import { Grid, GridItem } from '@consta/uikit/Grid';
-import {useApiQuery} from "../../store/api-actions";
 import {Loader} from "@consta/uikit/Loader";
+import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+
+import './ServicePage.css';
+import {useApiQuery} from "../../store/api-actions";
+import {setServices} from "../../store/store";
 
 
 const ServicePage = () => {
-    const { data, loading, error } = useApiQuery('https://673423afa042ab85d1190055.mockapi.io/api/v1/services');
+    const services = useSelector((state) => state.services);
+    useApiQuery("https://673423afa042ab85d1190055.mockapi.io/api/v1/services", setServices);
 
-    if (loading) {
+
+    if (services.loading) {
         return <div style={{display: "flex", alignItems: 'center', justifyContent: 'center', height: '70vh'}}>
             <Loader size={'m'}/>
         </div>;
     }
 
-    if (error) {
-        return <div>Error: {error.message}</div>;
+    if (services.error) {
+        return <div>Error: {services.error.message}</div>;
     }
 
     return (
         <div className="card-container">
             <Grid gap={"m"} cols={3}>
-                {data.map((card, index) => (
-                <GridItem>
-                    <Card key={index} verticalSpace="m" horizontalSpace="xl" form="round" className="rounded-card-main">
-                        <Text size="m" weight="bold" align="center">{card.name}</Text>
-                        <Text align="left">{card.description}</Text>
-                    </Card>
-                </GridItem>
-            ))}
+                {services.map((card, index) => (
+                    <GridItem key={index}>
+                        <Card verticalSpace="m" horizontalSpace="xl" form="round" className="rounded-card-main">
+                            <Link to={`http://localhost:3000/service/${card.id}`}>
+                                <Text size="m" weight="bold" align="center">{card.name}</Text>
+                            </Link>
+                            <Text align="left">{card.description}</Text>
+                        </Card>
+                    </GridItem>
+                ))}
             </Grid>
         </div>
     );
