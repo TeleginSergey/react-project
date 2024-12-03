@@ -1,30 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Text } from "@consta/uikit/Text";
 import { Layout } from "@consta/uikit/Layout";
 import { Button } from "@consta/uikit/Button";
 import { User } from "@consta/uikit/User";
-import './main-layout.css';
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import { dropToken, getToken } from "../store/token";
 import { setUser } from "../store/store";
-import { Text } from "@consta/uikit/Text";
+import './main-layout.css';
 
 const MainLayout = () => {
+  const currentDate = new Date();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user) || {};
 
   const [loading, setLoading] = useState(true);
+  const [activeNav, setActiveNav] = useState("home");
   const userToken = getToken();
 
   useEffect(() => {
-    // Если пользователь уже есть, просто заканчиваем загрузку
-    if (user) {
-      setLoading(false);
-      return;
-    }
-
-    // Запрашиваем информацию о пользователе
     const fetchUserInfo = async () => {
       if (!userToken) {
         console.error("Токен не найден");
@@ -41,8 +37,6 @@ const MainLayout = () => {
         });
 
         if (!response.ok) {
-          // Сбрасываем состояние пользователя при ошибке
-          dispatch(setUser(null));
           throw new Error("Не удалось загрузить информацию о пользователе");
         }
 
@@ -50,18 +44,27 @@ const MainLayout = () => {
         dispatch(setUser(userInfo));
       } catch (error) {
         console.error("Ошибка при загрузке пользователя:", error.message);
+        dispatch(setUser(null));
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUserInfo();
-  }, [dispatch, navigate, user, userToken]);
+    if (!user.firstName) {
+      fetchUserInfo();
+    } else {
+      setLoading(false);
+    }
+  }, [dispatch, user, userToken]);
 
   const handleLogout = () => {
     dropToken();
-    dispatch(setUser(null)); // Сбрасываем пользователя в Redux
-    navigate("/login"); // Перенаправляем на страницу логина
+    dispatch(setUser({'firstName': 'Гость'}));
+    navigate("/login", { replace: true });
+  };
+
+  const handleNavClick = (nav) => {
+    setActiveNav(nav);
   };
 
   if (loading) {
@@ -70,41 +73,61 @@ const MainLayout = () => {
 
   return (
     <div>
-      <Layout className="main-layout">
-        <Layout flex={1} className="button-group">
-          <Link to="/" className="nav-button button-margin">
-            <Button label={'Главная страница'} className="nav-button" />
-          </Link>
-          <Link to="/services" className="nav-button button-margin">
-            <Button label={'Услуги компании'} className="nav-button" />
-          </Link>
-        </Layout>
-        <Layout flex={0} className="button-group">
-          <Link to="/profile" className="nav-button button-margin">
-            <Button
-              label={
-                user ? (
-                  <User name={user.firstName} avatarUrl={user.image} />
-                ) : (
-                  <User name="ФИО" />
-                )
-              }
-              className="nav-button profile-button"
-            />
-          </Link>
-          {!user ? (
-            <Link to="/login" className="nav-button button-margin">
-              <Button label={'Вход'} className="nav-button" />
+      <div className={'page-container'}>
+        <Layout className="header-layout">
+          <Layout flex={1} className="button-group">
+            <Link to="/" className="nav-button button-margin" onClick={() => handleNavClick("home")}>
+              <Button label={'Главная страница'} className={`nav-button ${activeNav === "home" ? "active" : ""}`} />
             </Link>
-          ) : (
-            <Button label={'Выход'} className="nav-button button-margin" onClick={handleLogout} />
-          )}
+            <Link to="/services" className="nav-button button-margin" onClick={() => handleNavClick("services")}>
+              <Button label={'Услуги компании'} className={`nav-button ${activeNav === "services" ? "active" : ""}`} />
+            </Link>
+          </Layout>
+          <Layout flex={0} className="button-group">
+            <Link to="/profile" className="nav-button button-margin">
+              <Button
+                label={
+                  user.firstName ? (
+                    <User name={user.firstName} avatarUrl={user.image} />
+                  ) : (
+                    <User name="Гость" />
+                  )
+                }
+                className="nav-button profile-button"
+              />
+            </Link>
+
+            {userToken ? (
+              <Button label={'Выход'} className="nav-button button-margin" onClick={handleLogout} />
+            ) : (
+              <Link to="/login" className="nav-button button-margin" onClick={() => handleNavClick("login")}>
+                <Button label={'Вход'} className={`nav-button ${activeNav === "login" ? "active" : ""}`} />
+              </Link>
+            )}
+          </Layout>
         </Layout>
-      </Layout>
-      <hr className="divider" />
-      <main>
-        <Outlet />
-      </main>
+
+        <hr className="divider" />
+
+        <main>
+          <Outlet />
+        </main>
+      </div>
+      <div>
+        <footer className="footer">
+          <Layout className="footer-layout" justify="between">
+            <div className="footer-buttons">
+              <Link to="/" className="button-margin" onClick={() => handleNavClick("home")}>
+                <Button label={'Главная страница'} className={`nav-button ${activeNav === "home" ? "active" : ""}`} />
+              </Link>
+              <Link to="/services" className="nav-button button-margin" onClick={() => handleNavClick("services")}>
+                <Button label={'Услуги компании'} className={`nav-button ${activeNav === "services" ? "active" : ""}`} />
+              </Link>
+            </div>
+            <Text size="m" className="footer-text">©️ {currentDate.getFullYear()} Моя компания</Text>
+          </Layout>
+        </footer>
+      </div>
     </div>
   );
 }

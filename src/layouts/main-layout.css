@@ -1,24 +1,29 @@
-.main-layout {
+.page-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+.main-layout {
+  display: flex;
+  flex-direction: row;
 }
 
 .divider {
-    margin: 8px 0; /* Отступ сверху и снизу для <hr /> */
-    border: 1px solid #4a90e2; /* граница */
+    margin: 8px 0;
+    border: 1px solid #4a90e2;
 }
 
 .button-group {
     display: flex;
-    gap: 5px; /* Отступ между кнопками в группе */
+    gap: 5px;
 }
 
 .button-margin {
-    margin-right: 5px; /* Отступ между кнопками */
+    margin-right: 5px;
 }
 
 .button-margin:last-child {
-    margin-right: 0; /* Убираем отступ у последней кнопки */
+    margin-right: 0;
 }
 
 .nav-button {
@@ -32,9 +37,9 @@
     text-decoration: none;
 }
 
-.nav-button:hover {
-    background-color: #5a98de;
-    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+.nav-button.active {
+  background-color: #007bff;
+  color: white;
 }
 
 .profile-button {
@@ -42,4 +47,23 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.footer {
+  padding: 10px;
+  border-top: 2px solid #4a90e2;
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.footer-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-text {
+  margin-left: 20px;
 }
