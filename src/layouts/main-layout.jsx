@@ -84,15 +84,12 @@ const MainLayout = () => {
             </Link>
           </Layout>
           <Layout flex={0} className="button-group">
-            <Link to="/profile" className="nav-button button-margin">
+            <Link to="/profile" className="nav-button button-margin" onClick={() => handleNavClick("profile")}>
               <Button
-                label={
-                    <User name={user.firstName} avatarUrl={user.image} />
-                }
-                className="nav-button profile-button"
+                label={<User name={userToken ? user.firstName : 'Гость'} avatarUrl={user.image} />}
+                className={`profile-button nav-button ${activeNav === "profile" ? "active" : ""}`}
               />
             </Link>
-
             {userToken ? (
               <Button label={'Выход'} className="nav-button button-margin" onClick={handleLogout} />
             ) : (
@@ -101,6 +98,7 @@ const MainLayout = () => {
               </Link>
             )}
           </Layout>
+
         </Layout>
 
         <hr className="divider" />
