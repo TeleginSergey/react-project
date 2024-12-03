@@ -87,11 +87,7 @@ const MainLayout = () => {
             <Link to="/profile" className="nav-button button-margin">
               <Button
                 label={
-                  user.firstName ? (
                     <User name={user.firstName} avatarUrl={user.image} />
-                  ) : (
-                    <User name="Гость" />
-                  )
                 }
                 className="nav-button profile-button"
               />
