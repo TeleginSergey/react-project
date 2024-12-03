@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 87vh;
+  height: 82vh;
   padding: 20px;
   background-color: #f5f5f5;
   border-radius: 10px;
@@ -52,6 +52,6 @@
 }
 
 .loading-text, .error-text {
-  color: #ff5252; /* Красный цвет для ошибок */
+  color: #ff5252;
   margin: 20px 0;
 }

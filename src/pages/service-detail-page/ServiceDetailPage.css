@@ -13,11 +13,12 @@
     display: flex;
     justify-content: center;
     padding: 20px;
+    margin-bottom: 26vh;
 }
 
 .service-detail-image {
-    width: 100%; /* ширина изображения */
-    height: auto; /* автоматическая высота */
-    border-radius: 8px; /* радиус углов */
-    margin-bottom: 16px; /* отступ снизу */
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 16px;
 }

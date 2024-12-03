@@ -1,10 +1,12 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 import { Card } from "@consta/uikit/Card";
 import { Text } from "@consta/uikit/Text";
 import { Loader } from "@consta/uikit/Loader";
-import './ServiceDetailPage.css';
-import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+
 import {getToken} from "../../store/token";
+import './ServiceDetailPage.css';
+
 
 const ServiceDetailPage = () => {
     const [service, setService] = useState(null);

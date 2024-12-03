@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Text } from "@consta/uikit/Text";
-import { getToken } from "../../store/token";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
+
+import { getToken } from "../../store/token";
 import { setUser } from "../../store/store";
 import './ProfilePage.css';
+
 
 const ProfilePage = () => {
   const dispatch = useDispatch();

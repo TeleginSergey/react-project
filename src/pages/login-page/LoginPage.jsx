@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Informer } from '@consta/uikit/Informer';
 import { useNavigate } from 'react-router-dom';
+
 import { saveToken } from "../../store/token";
 import './LoginPage.css';
+
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');

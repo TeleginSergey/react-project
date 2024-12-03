@@ -1,11 +1,12 @@
 import { Card } from "@consta/uikit/Card";
 import { Text } from "@consta/uikit/Text";
-import {useApiQuery} from "../../store/api-actions";
 import { Loader } from '@consta/uikit/Loader';
 import {useSelector} from "react-redux";
 
-import './MainPage.css';
+import {useApiQuery} from "../../store/api-actions";
 import {setNews} from "../../store/store";
+import './MainPage.css';
+
 
 const MainPage = () => {
     const mainNews = useSelector((state) => state.mainNews);
@@ -21,16 +22,17 @@ const MainPage = () => {
     if (mainNews.error) {
         return <div>Error: {mainNews.error.message}</div>;
     }
+    let options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'UTC' };
 
     return (
         <div>
             {mainNews.map((card, index) => (
                 <Card key={index} verticalSpace="m" horizontalSpace="xl" form="round" className="rounded-card-main">
-                    <Text size="m" weight="bold">{card.name}</Text> {/* Отображение названия карточки */}
+                    <Text size="m" weight="bold">{card.name}</Text>
                     <Text>{card.description}</Text>
                     <div className="card-footer">
                         <Text size="s" weight="regular" view="secondary">
-                            {card.createdAt}
+                            {new Date(card.createdAt).toLocaleString('ru-RU', options)}
                         </Text>
                     </div>
                 </Card>

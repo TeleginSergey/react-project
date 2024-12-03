@@ -1,60 +1,59 @@
-/* Общие стили для страницы входа */
 .login-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Заполняет всю высоту экрана */
-    background-color: #f7f9fc; /* Светлый фон */
+    min-height: 87vh;
+    background-color: #f7f9fc;
 }
 
 .login-form {
-    width: 30vw; /* Ширина формы */
-    background-color: white; /* Фон формы */
-    border-radius: 10px; /* Закруглённые углы */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Тень для формы */
-    padding: 20px; /* Отступы вокруг содержимого */
+    width: 30vw;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
 .login-form label {
     display: block;
     margin-bottom: 8px;
-    color: #333; /* Цвет текста */
-    font-weight: bold; /* Жирный шрифт */
+    color: #333;
+    font-weight: bold;
 }
 
 .login-form input {
-    width: 100%; /* Занимает всю ширину */
-    padding: 12px; /* Внутренние отступы */
-    border-radius: 8px; /* Закруглённые углы */
-    border: 1px solid #ccc; /* Светлая рамка */
-    transition: border-color 0.3s; /* Плавный переход цвета рамки */
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
 }
 
 .login-form input:focus {
-    border-color: #007bff; /* Цвет рамки при фокусе */
-    outline: none; /* Убирает оригинальное выделение */
+    border-color: #007bff;
+    outline: none;
 }
 
 .informer {
-    margin-bottom: 16px; /* Отступ снизу для ошибочных сообщений */
+    margin-bottom: 16px;
 }
 
 .submit-button {
     display: flex;
-    justify-content: flex-end; /* Выравнивание по правому краю */
-    margin-top: 16px; /* Отступ сверху */
+    justify-content: flex-end;
+    margin-top: 16px;
 }
 
 .submit-button button {
-    background-color: #007bff; /* Цвет фона кнопки */
-    border: none; /* Убираем стандартное оформление */
-    padding: 12px 20px; /* Внутренние отступы */
-    border-radius: 5px; /* Закруглённые углы */
-    color: white; /* Цвет текста */
-    cursor: pointer; /* Указатель на курсор */
-    transition: background-color 0.3s; /* Плавный переход цвета фона кнопки */
+    background-color: #007bff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .submit-button button:hover {
-    background-color: #0056b3; /* Цвет фона кнопки при наведении */
+    background-color: #0056b3;
 }
